@@ -2,11 +2,11 @@
 
 namespace Chat;
 
+use Chat\Repository\ChatRepository;
 use Ratchet\MessageComponentInterface;
 use SplObjectStorage;
 use Exception;
 use Ratchet\ConnectionInterface;
-use Chat\Repository\ChatRepository;
 
 class Chat implements MessageComponentInterface
 {
@@ -19,12 +19,12 @@ class Chat implements MessageComponentInterface
 
   public function onOpen(ConnectionInterface $conn)
   {
-      $this->repository->attach($conn);
+      $this->repository->addClient($conn);
   }
 
   public function onClose(ConnectionInterface $conn)
   {
-      $this->repository->detach($conn);
+      $this->repository->removeClient($conn);
   }
 
   public function onMessage(ConnectionInterface $conn, $msg)

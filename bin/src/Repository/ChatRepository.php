@@ -4,6 +4,7 @@ namespace Chat\Repository;
 
 use Ratchet\ConnectionInterface;
 use SplObjectStorage;
+use Chat\Connection\ChatConnection;
 
 /**
  *
