@@ -3,6 +3,7 @@
 namespace Chat\Connection;
 
 use Ratchet\ConnectionInterface;
+use Chat\Repository\ChatRepositoryInterface;
 
 class ChatConnection implements ChatConnectionInterface
 {
@@ -18,7 +19,7 @@ class ChatConnection implements ChatConnectionInterface
         $this->repository = $repository;
     }
 
-    public function sendMessage($sender, $msg)
+    public function sendMsg($sender, $msg)
     {
         $this->send([
             'action' => 'message',
@@ -42,8 +43,9 @@ class ChatConnection implements ChatConnectionInterface
             $this->send([
                 'action' => 'setname',
                 'success' => false,
-                'username' => $name
+                'username' => $this->name
             ]);
+            return;
         }
 
         $this->name = $name;

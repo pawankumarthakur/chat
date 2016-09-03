@@ -14,6 +14,15 @@ div, textarea {
   border-right: 1px solid #242424;
 }
 
+#username {
+    margin: 20px;
+    padding: 10px;
+}
+
+#chatcontainer {
+    display: none;
+}
+
 .chat, .form {
   padding: 0 10px;
 }

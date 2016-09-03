@@ -33,7 +33,7 @@ class ChatRepository implements ChatRepositoryInterface
     public function getClientByConnection(ConnectionInterface $conn)
     {
         foreach ($this->clients as $client) {
-            if ($client->getConnection() === conn) {
+            if ($client->getConnection() === $conn) {
                 return $client;
             }
 

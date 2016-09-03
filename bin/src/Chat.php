@@ -4,8 +4,6 @@ namespace Chat;
 
 use Chat\Repository\ChatRepository;
 use Ratchet\MessageComponentInterface;
-use SplObjectStorage;
-use Exception;
 use Ratchet\ConnectionInterface;
 
 class Chat implements MessageComponentInterface
@@ -19,6 +17,7 @@ class Chat implements MessageComponentInterface
 
   public function onOpen(ConnectionInterface $conn)
   {
+      echo "Connection established";
       $this->repository->addClient($conn);
   }
 
@@ -29,12 +28,17 @@ class Chat implements MessageComponentInterface
 
   public function onMessage(ConnectionInterface $conn, $msg)
   {
+
       $data = $this->parseMessage($msg);
       $currClient = $this->repository->getClientByConnection($conn);
+      if($currClient == null){
+          echo "Client not found";
+      }
+      print_r($data->username , false);
 
-      if ($data->action == "setname") {
+      if ($data->action === "setname") {
           $currClient->setName($data->username);
-      } else if($data->action == "message") {
+      } else if($data->action === "message") {
           if ($currClient->getName() === "") {
               return;
           }
@@ -53,7 +57,7 @@ class Chat implements MessageComponentInterface
       return json_decode($msg);
   }
 
-  public function onError(ConnectionInterface $conn, Exception $e)
+  public function onError(ConnectionInterface $conn, \Exception $e)
   {
       echo "The following error occured".$e->getMessage();
       $client = $this->repository->getClientByConnection($conn);

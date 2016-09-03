@@ -11,5 +11,5 @@ interface ChatConnectionInterface
 
     public function setName($name);
 
-    public function sendMessage($sender, $msg);
+    public function sendMsg($sender, $msg);
 }

@@ -6,13 +6,17 @@
     <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
   </head>
   <body>
-    <div class="container">
+      <div id="user">
+          <input type="text" id="username" placeholder="enter your username">
+      </div>
+    <div class="container" id="chatcontainer">
       <div class="chat" id="chatwindow"></div>
         <div class="form">
-          <textarea name="name" id="messagebox" placeholder="Write here"></textarea>
+          <textarea name="message" id="messagebox" placeholder="Write here"></textarea>
         </div>
       </div>
 
+    <script src="js/Connection.js"></script>
     <script src="js/app.js">
     </script>
   </body>
