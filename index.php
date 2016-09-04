@@ -24,7 +24,8 @@
             <h2>Login to Chat</h2>
             <div class="form-group" id="user">
                 <label for="username">Enter your username:</label>
-                <input type="text" id="username" autocomplete="off" class="form-control" placeholder="enter your username">
+                <input type="text" id="username" autocomplete="off" class="form-control"
+                       placeholder="enter your username">
             </div>
             <div class="form-group">
                 <input type="button" id="submitusername" class="btn btn-success" value="Login">
@@ -45,7 +46,10 @@
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/Connection.js"></script>
-<script src="js/app.js">
-</script>
+<script src='<?php if (("http://" . $_SERVER['HTTP_HOST']) == "http://chat.dev") {
+    echo "js/app_dev.js";
+} else {
+    echo "js/app.js";
+} ?>'></script>
 </body>
 </html>

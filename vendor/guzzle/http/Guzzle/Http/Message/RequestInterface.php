@@ -131,14 +131,14 @@ interface RequestInterface extends MessageInterface, HasDispatcherInterface
     public function setHost($host);
 
     /**
-     * Get the path of the request (e.g. '/', '/index.html')
+     * Get the path of the request (e.g. '/', '/index.php')
      *
      * @return string
      */
     public function getPath();
 
     /**
-     * Set the path of the request (e.g. '/', '/index.html')
+     * Set the path of the request (e.g. '/', '/index.php')
      *
      * @param string|array $path Path to set or array of segments to implode
      *
