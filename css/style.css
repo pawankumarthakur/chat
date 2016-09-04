@@ -1,47 +1,51 @@
-html, body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-div, textarea {
-  box-sizing: border-box;
-}
-
-.container {
-  height: 100%;
-  width: 400px;
-  border-right: 1px solid #242424;
-}
-
-#username {
-    margin: 20px;
-    padding: 10px;
-}
 
 #chatcontainer {
     display: none;
 }
 
 .chat, .form {
-  padding: 0 10px;
+    padding: 0 10px;
 }
 
 .chat {
-  height: calc(100% - 150px);
+    height: calc(100% - 150px);
 }
 
 .form {
-  height: 150px;
-  border-top: 1px solid #242424;
+    /*height: 150px;*/
+    border: 1px solid #242424;
 }
 
 #messagebox {
-  resize: none;
-  width: 100%;
-  height: 100%;
-  display: block;
-  padding: 10px 0;
-  border: none;
-  outline: none;
+    resize: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+}
+
+#chatwindow {
+    border: 1px solid #aaa;
+    margin: 10px 0px;
+    border-radius: 10px;
+    max-height: 400px;
+    padding: 10px;
+    overflow-y: auto;
+    min-height: 400px;
+}
+
+#chat-system-msg {
+    color: red;
+    font-style: italic;
+}
+
+#chat-user-msg {
+    color: #666;
+}
+
+#chat-user-msg span {
+    color: darkgreen;
+    font-weight: 700;
 }

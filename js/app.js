@@ -3,31 +3,28 @@ var username = document.getElementById("username");
 var chatcontainer = document.getElementById("chatcontainer");
 var conn;
 
-username.addEventListener('keypress', function(evt){
-    if (evt.keyCode != 13 || this.value == "") {
-      return;
-    }
-
-    // console.log(evt.value);
+$("#submitusername").click(function (evt) {
+    if (username.value == "")
+        return;
     evt.preventDefault();
-
-    var name = this.value;
-    this.style.display = "none";
+    var name = username.value;
+    $("#login-container").css('display', 'none');
     chatcontainer.style.display = "block";
 
-    conn = new Connection(name, "chatwindow", "chat.dev:2000");
+    conn = new Connection(name, "chatwindow", "127.0.0.1:2000");
+
 });
 
-messagebox.addEventListener('keypress', function(evt){
+messagebox.addEventListener('keypress', function (evt) {
     if (evt.keyCode != 13 || conn == undefined) {
-      return;
+        return;
     }
 
     // console.log(msg.value);
     evt.preventDefault();
 
     if (this.value == "") {
-      return;
+        return;
     }
 
     conn.sendMsg(this.value);

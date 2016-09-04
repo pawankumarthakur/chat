@@ -21,11 +21,11 @@ var Connection = (function(){
         },
 
         addChatMessage: function(name, msg) {
-            this.chatwindow.innerHTML += '<p>' + name + ': ' + msg + '</p>';
+            this.chatwindow.innerHTML += '<p id="chat-user-msg"><span>' + name + '> </span> ' + msg + '(' + new Date(Date.now()).toLocaleTimeString() + ')' +'</p>';
         },
 
         addSystemMessage: function(msg) {
-            this.chatwindow.innerHTML += '<p><b>' + msg + '<b></p>';
+            this.chatwindow.innerHTML += '<p id="chat-system-msg">' + msg + '(' + new Date(Date.now()).toLocaleTimeString() + ')' + '</p>';
         },
 
         setupConnectionEvents: function() {
