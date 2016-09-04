@@ -1,8 +1,8 @@
 var Connection = (function(){
-    function Connection(username, chatWindowId, url) {
+    function Connection(username, chatWindowId, url, usercount) {
         this.username = username;
         this.chatwindow = document.getElementById(chatWindowId);
-
+        this.usercount = document.getElementById(usercount);
         this.open = false;
 
         this.socket = new WebSocket("ws://" + url);
@@ -56,6 +56,9 @@ var Connection = (function(){
                     }
                 } else if(data.action == 'message') {
                     this.addChatMessage(data.username, data.msg);
+                } else if(data.action == 'usercount') {
+                    this.usercount.innerHTML = 'Chat - ' + data.usercount + ' Users online';
+
                 }
         },
 

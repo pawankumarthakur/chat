@@ -11,7 +11,7 @@ $("#submitusername").click(function (evt) {
     $("#login-container").css('display', 'none');
     chatcontainer.style.display = "block";
 
-    conn = new Connection(name, "chatwindow", "127.0.0.1:8080");
+    conn = new Connection(name, "chatwindow", "chat.warlock31.com:8080", "usercount");
 
 });
 

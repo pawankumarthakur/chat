@@ -40,7 +40,10 @@ class ChatRepository implements ChatRepositoryInterface
 
     public function addClient(ConnectionInterface $conn)
     {
+//        echo "addClient";
         $this->clients->attach(new ChatConnection($conn, $this));
+
+
     }
 
     public function removeClient(ConnectionInterface $conn)
@@ -56,4 +59,9 @@ class ChatRepository implements ChatRepositoryInterface
     {
         return $this->clients;
     }
+
+//    public function sendClientsCount($conn){
+//        $chatConnection = $this->getClientByConnection($conn);
+//        $chatConnection->sendCustomMsg($this->clients->count());
+//    }
 }
