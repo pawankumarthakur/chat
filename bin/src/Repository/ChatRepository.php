@@ -2,43 +2,40 @@
 
 namespace Chat\Repository;
 
-use Ratchet\ConnectionInterface;
 use SplObjectStorage;
 use Chat\Connection\ChatConnection;
+use Ratchet\ConnectionInterface;
 
-/**
- *
- */
+
 class ChatRepository implements ChatRepositoryInterface
 {
 
     private $clients;
 
-    function __construct()
+    public function __construct()
     {
         $this->clients = new SplObjectStorage;
     }
 
     public function getClientByName($name)
     {
-        foreach ($this->clients as $client) {
-            if ($client->getName() === $name) {
+        foreach ($this->clients as $client)
+        {
+            if ($client->getName() === $name)
                 return $client;
-            }
 
-            return null;
         }
+        return null;
     }
 
     public function getClientByConnection(ConnectionInterface $conn)
     {
         foreach ($this->clients as $client) {
-            if ($client->getConnection() === $conn) {
+            if ($client->getConnection() === $conn)
                 return $client;
-            }
 
-            return null;
         }
+        return null;
     }
 
     public function addClient(ConnectionInterface $conn)

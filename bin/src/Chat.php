@@ -8,63 +8,59 @@ use Ratchet\ConnectionInterface;
 
 class Chat implements MessageComponentInterface
 {
-  protected $repository;
+    protected $repository;
 
-  public function __construct()
-  {
-      $this->repository = new ChatRepository;
-  }
+    public function __construct()
+    {
+        $this->repository = new ChatRepository;
+    }
 
-  public function onOpen(ConnectionInterface $conn)
-  {
-      echo "Connection established";
-      $this->repository->addClient($conn);
-  }
+    public function onOpen(ConnectionInterface $conn)
+    {
+        $this->repository->addClient($conn);
+    }
 
-  public function onClose(ConnectionInterface $conn)
-  {
-      $this->repository->removeClient($conn);
-  }
+    public function onMessage(ConnectionInterface $conn, $msg)
+    {
 
-  public function onMessage(ConnectionInterface $conn, $msg)
-  {
+        $data = $this->parseMessage($msg);
+        $currClient = $this->repository->getClientByConnection($conn);
 
-      $data = $this->parseMessage($msg);
-      $currClient = $this->repository->getClientByConnection($conn);
-      if($currClient == null){
-          echo "Client not found";
-      }
-      print_r($data->username , false);
+        if ($data->action === "setname")
+        {
+            $currClient->setName($data->username);
+        } else if ($data->action === "message") {
+            if ($currClient->getName() === "")
+                return;
 
-      if ($data->action === "setname") {
-          $currClient->setName($data->username);
-      } else if($data->action === "message") {
-          if ($currClient->getName() === "") {
-              return;
-          }
+            foreach ($this->repository->getClients() as $client)
+            {
+                if ($currClient->getName() !== $client->getName())
+                    $client->sendMsg($currClient->getName(), $data->msg);
+            }
 
-          foreach ($this->repository->getClients() as $client) {
-              if ($currClient->getName() !== $client->getName()) {
-                  $client->sendMsg($currClient->getName(), $data->msg);
-              }
-          }
+        }
+    }
 
-      }
-  }
 
-  private function parseMessage($msg)
-  {
-      return json_decode($msg);
-  }
+    public function onClose(ConnectionInterface $conn)
+    {
+        $this->repository->removeClient($conn);
+    }
 
-  public function onError(ConnectionInterface $conn, \Exception $e)
-  {
-      echo "The following error occured".$e->getMessage();
-      $client = $this->repository->getClientByConnection($conn);
-      if ($client !== null) {
-          $client->getConnection()->close();
-          $this->repository->removeClient($conn);
-      }
-  }
+    private function parseMessage($msg)
+    {
+        return json_decode($msg);
+    }
+
+    public function onError(ConnectionInterface $conn, \Exception $e)
+    {
+        echo "The following error occured" . $e->getMessage();
+        $client = $this->repository->getClientByConnection($conn);
+        if ($client !== null) {
+            $client->getConnection()->close();
+            $this->repository->removeClient($conn);
+        }
+    }
 
 }
