@@ -16,6 +16,10 @@
     border: 1px solid #242424;
 }
 
+.chatbox {
+    list-style: none;
+}
+
 #messagebox {
     resize: none;
     width: 100%;

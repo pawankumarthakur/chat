@@ -12,7 +12,7 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation" class="active"><a h ref="#">Home</a></li>
                 <li role="presentation"><a href="#">Users</a></li>
                 <li role="presentation"><a href="#">Contact</a></li>
             </ul>
@@ -25,20 +25,29 @@
             <h2>Login to Chat</h2>
             <div class="form-group" id="user">
                 <label for="username">Enter your username:</label>
-                <input type="text" id="username" v-on:click="usersubmit" autocomplete="off" class="form-control"
+                <input type="text" id="username" autocomplete="off" class="form-control"
                        placeholder="enter your username">
             </div>
             <div class="form-group">
-                <input type="button" id="submitusername" class="btn btn-success" value="Login">
+                <input type="button" id="submitusername" v-on:click="userSubmit" class="btn btn-success" value="Login">
             </div>
         </div>
 
     </div>
 
     <div class="" id="chatcontainer">
-        <div class="chat" id="chatwindow" v-model="chatwindow"></div>
+        <div class="chat" id="chatwindow" v-model="chatwindow">
+            <li class="chatbox" v-for="chat in chats">
+                <p v-if="chat.type == 'system'" id="chat-system-msg">
+                    <span>{{chat.name}}: </span> {{chat.message}} ({{chat.time}})
+                </p>
+                <p v-if="chat.type == 'user'" id="chat-user-msg">
+                    <span>{{chat.name}}: </span> {{chat.message}} ({{chat.time}})
+                </p>
+            </li>
+        </div>
         <div class="form">
-            <textarea name="message" id="messagebox" placeholder="Write here"></textarea>
+            <textarea name="message" v-model="premessage" id="messagebox" v-on:keyup.enter="sendmessage" placeholder="Write here"></textarea>
         </div>
     </div>
 </div>
@@ -48,11 +57,5 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/vue.min.js"></script>
 <script src="js/vue.app.js"></script>
-<script src="js/Connection.js"></script>
-<script src='<?php if (("http://" . $_SERVER['HTTP_HOST']) == "http://chat.dev") {
-    echo "js/app_dev.js";
-} else {
-    echo "js/app.js";
-} ?>'></script>
 </body>
 </html>
