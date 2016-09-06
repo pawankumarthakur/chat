@@ -17,7 +17,7 @@
                 <li role="presentation"><a href="#">Contact</a></li>
             </ul>
         </nav>
-        <h3 class="text-muted" id="usercount">Chat <span>{{usercount}}</span></h3>
+        <h3 class="text-muted" id="usercount">Chat</span></h3>
     </div>
 
     <div class="row" id="login-container">
@@ -34,8 +34,8 @@
         </div>
 
     </div>
-
-    <div class="" id="chatcontainer">
+    <div class="row" id="chatcontainer">
+    <div class="col-md-8">
         <div class="chat" id="chatwindow" v-model="chatwindow">
             <li class="chatbox" v-for="chat in chats">
                 <p v-if="chat.type == 'system'" id="chat-system-msg">
@@ -50,9 +50,15 @@
             <textarea name="message" v-model="premessage" id="messagebox" v-on:keyup.enter="sendmessage" placeholder="Write here"></textarea>
         </div>
     </div>
+    <div class="col-md-4">
+        <h3>Users Online <span v-if="usercount > 0">({{usercount}})</h3>
+        <li class="chatbox" v-for="(index, message) in users">
+            <h4>{{index}} - {{message}}</h4>
+        </li>
+
+    </div>
 </div>
-
-
+</div>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/vue.min.js"></script>

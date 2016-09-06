@@ -67,11 +67,12 @@ class ChatConnection implements ChatConnectionInterface
         $this->connection->send(json_encode($data));
     }
 
-    public function sendCustomMsg($count)
+    public function sendCustomMsg($newuser, $usercount)
     {
         $data = [
             'action' => 'usercount',
-            'usercount' => $count
+            'newuser' => $newuser,
+            'usercount' => $usercount
         ];
         $this->connection->send(json_encode($data));
     }

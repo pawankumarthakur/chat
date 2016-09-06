@@ -1,3 +1,14 @@
+body{
+    background-color: #e9ebee;
+}
+
+#chatcontainer .col-md-8, #chatcontainer .col-md-4{
+	border: 1px solid;
+	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+	border-radius: 3px;
+    background-color: #fff;
+}
+
 
 #chatcontainer {
     display: none;
@@ -12,8 +23,8 @@
 }
 
 .form {
-    /*height: 150px;*/
-    border: 1px solid #242424;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
 }
 
 .chatbox {
@@ -31,22 +42,41 @@
 }
 
 #chatwindow {
-    border: 1px solid #aaa;
     margin: 10px 0px;
     border-radius: 10px;
     max-height: 400px;
-    padding: 10px;
+    /*padding: 10px;*/
     overflow-y: auto;
     min-height: 400px;
 }
 
 #chat-system-msg {
-    color: red;
-    font-style: italic;
+	color: black;
+	font-style: normal;
+	background-color: #ccc;
+	border-radius: 4px;
+	padding: 10px 10px;
+	width: 100%;
+	float: left;
 }
 
 #chat-user-msg {
-    color: #666;
+	color: #ccc;
+	font-style: normal;
+	background-color: #000;
+	border-radius: 4px;
+	padding: 10px 10px;
+	width: 100%;
+	float: left;
+}
+#chat-current-user-msg {
+	color: #ccc;
+	font-style: italic;
+	background-color: #000;
+	border-radius: 10px;
+	padding: 5px 10px;
+	width: 80%;
+	float: right;
 }
 
 #chat-user-msg span {

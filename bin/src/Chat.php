@@ -9,19 +9,18 @@ use Ratchet\ConnectionInterface;
 class Chat implements MessageComponentInterface
 {
     protected $repository;
-//    protected $usercount;
+    protected $userlist;
 
     public function __construct()
     {
         $this->repository = new ChatRepository;
-//        $this->usercount = 0;
+        $this->userlist = array();
     }
 
     public function onOpen(ConnectionInterface $conn)
     {
-//        $this->usercount =+ 1;
         $this->repository->addClient($conn);
-        $this->onMessage($conn, json_encode(['action' => 'connectionupdate', 'connection' => $this->repository->getClients()->count()]));
+
     }
 
     public function onMessage(ConnectionInterface $conn, $msg)
@@ -32,21 +31,22 @@ class Chat implements MessageComponentInterface
 
         if ($data->action === "setname") {
             $currClient->setName($data->username);
-//            foreach ($this->repository->getClients() as $client) {
-//                $client->sendCustomMsg($this->usercount);
-//            }
+            $this->userlist[$data->username] = $data->username;
+            // echo $this->userlist;
+            $this->onMessage($conn, json_encode(['action' => 'connectionupdate', 'usercount' => $this->repository->getClients()->count()]));
+            // $currClient->sendCustomMsg($this->userlist, $this->repository->getClients()->count());
         } else if ($data->action === "message") {
             if ($currClient->getName() === "")
-                return;
+            return;
 
             foreach ($this->repository->getClients() as $client) {
                 if ($currClient->getName() !== $client->getName())
-                    $client->sendMsg($currClient->getName(), $data->msg);
+                $client->sendMsg($currClient->getName(), $data->msg);
             }
 
         } else if ($data->action === "connectionupdate") {
             foreach ($this->repository->getClients() as $client) {
-                $client->sendCustomMsg($data->connection);
+                $client->sendCustomMsg($this->userlist, $data->usercount);
             }
         }
     }

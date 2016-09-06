@@ -13,5 +13,5 @@ interface ChatConnectionInterface
 
     public function sendMsg($sender, $msg);
 
-    public function sendCustomMsg($count);
+    public function sendCustomMsg($newuser, $usercount);
 }
